@@ -1,3 +1,8 @@
+// named function that generates a number between 1 and 100 that the user will have to guess. 
+var numGen = function() {
+	return Math.floor((Math.random() * 100) + 1);
+};
+
 
 $(document).ready(function(){
 	
@@ -12,9 +17,10 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
-  	var input = document.getElementById("#userGuess");
+  	var $input = $("#userGuess");
+  	var hiddenNum;
   	// or?
-  	.find()
+  	// .find()
 
  // start a new game when the user clicks the "New Game" button
 
@@ -22,32 +28,29 @@ $(document).ready(function(){
  // create a newGame function that does everything necessary to start a new game.
 
  var newGame = function() {
- 	numGen();
- 	whatUserGuess();
+ 	hiddenNum = numGen();
  		// button does not currently do anything. write code that allows users to start a new game 
- 	$(".new").click(function() {
- 		newGame();
- 	});
+
  		// Clicking "New Game" should trigger the JavaScript function that starts a new game.
 
 	// without making additional calls to the server. 
-	preventDefault();
 
- 	$( "#userGuess").click();
+ 
  	};
- }
 
+  	newGame();
+
+  	 	$(".new").click(function() {
+ 		newGame();
+ 	});
+
+  	 	$( "#userGuess").click();
  
 
 
- // named function that generates a number between 1 and 100 that the user will have to guess. 
-var numGen = function() {
-	hiddenNum = Math.floor((Math.random() * 100) + 1);
-};
-
  // write a named function that takes a user guess and determines which feedback to provide.
 
- var whatUserGuess = function() {
+ var whatUserGuess = function(hiddenNum, userGuess) {
 
 
 
@@ -57,19 +60,22 @@ var numGen = function() {
 	// between 30 and 50 they are "cold", between 20 and 30 they are warm, between 10 and 20 hot, 
 	// and between 1 and 10 "very hot". choose what the ranges are and what feedback you provide.
 
-			if (hiddenNum === userGuess) {
-				return "You Win!!)"
-			} else if (hiddenNum - userGuess >= 50) {
+var absoluteDiff = Math.abs(userGuess - hiddenNum);
+
+			if (absoluteDiff === 0){
+				return "You Win!!";
+			} else if (absoluteDiff >= 50) {
 				return "Ice cold";
-			} else if (numGen - userGuess > 30 && numGen - userGuess < 50 ) {
+			} else if (absoluteDiff >= 30) {
 				return "Cold";
-			} else if (numGen - userGuess > 20 && numGen - userGuess < 30 ) {
+			} else if (absoluteDiff >= 20 ) {
 				return "Warm";
-			} else if (numGen - userGuess > 10 && numGen - userGuess < 20 ) {
+			} else if (absoluteDiff >= 10) {
 				return "Hot";
-			} else if (numGen - userGuess > 1 && numGen - userGuess < 10 ) {
+			} else {
 				return "Very Hot!";
-			
+ 			}
+};
 
 		// Feedback about the guess should appear in div#feedback. 
 
@@ -77,7 +83,6 @@ var numGen = function() {
 
 
 
- }; 
 // track how many guesses the user has made. Feedback about this should appear in span#count 
 	// (which defaults to 0, when the page loads).
 
@@ -88,6 +93,21 @@ var numGen = function() {
 // don't worry about blank guesses being submitted (if the user submits a blank guess, they'll be prompted to supply an input).
 // you will need to write code that ensures that the user has supplied a numeric input between 1 and 100.
 
+function isInputValid($input) {
+	if(isNaN($input)) {
+		return false;
+	} else if ($input % 1 !== 0) {
+		return false;
+	} else if ($input <= 0) {
+		return false;
+	} else if ($input > 100) {
+		return false;
+	} else {
+		return true;
+	}
+	}
+	
+
 
  // start a new game without refreshing or reloading the page.
 
@@ -97,6 +117,5 @@ var numGen = function() {
 
 
 
-});
 
 
