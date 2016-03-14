@@ -4,7 +4,6 @@ var numGen = function() {
 };
 
 // ensure that user has provided valid numberical inputs. 
-
 function isInputValid(userInput) {
 	if(isNaN(userInput)) {
 		return false;
@@ -19,16 +18,10 @@ function isInputValid(userInput) {
 	}
 }
 
-
-
  // write a named function that takes a user guess and determines which feedback to provide.
-
  var whatsUserGuess = function(hiddenNum, userGuess) {
 
-
-
  // give feedback about each guess – if it was too low, too high, or just right. 
-
 var absoluteDiff = Math.abs(userGuess - hiddenNum);
 
 			if (absoluteDiff === 0){
@@ -45,8 +38,6 @@ var absoluteDiff = Math.abs(userGuess - hiddenNum);
 				return "Very Hot!";
  			}
 };
-
-
 
 
 $(document).ready(function(){
@@ -73,7 +64,6 @@ $(document).ready(function(){
 
 
  // create a newGame function that does everything necessary to start a new game.
-
  var newGame = function() {
  	hiddenNum = numGen();
  	guessCount = 0;
@@ -82,8 +72,6 @@ $(document).ready(function(){
  		$feedback.text("Make your guess!");
  		$List.empty();
  		$input.val("");
-
-
  	};
 
   	newGame();
@@ -91,10 +79,6 @@ $(document).ready(function(){
    	 	$("a.new").click(function() {
  		newGame();	
  	});
-
- 		// button does not currently do anything. write code that allows users to start a new game 
-
- 		// Clicking "New Game" should trigger the JavaScript function that starts a new game.
 
 
   	 	$( "#userGuess").click();
@@ -109,35 +93,23 @@ $button.click(function() {
 	if (isInputValid(inputValue)) {
 		var feedback = whatsUserGuess(hiddenNum, inputValue);
 		$feedback.text(feedback);
+
+	// track how many guesses the user has made. Feedback about this should appear in span#count 
+	// (which defaults to 0, when the page loads).
 		guessCount++;
 			$count.text(guessCount);
 		guessList.push(inputValue);
+
+	// add each guessed number as an <li> to ul#guessList.
 		$List.append("<li>" + inputValue + "</li>");
-		// duplacate guesses
-	} else {
+		$input.val("");
+	}
+		else if (guessList.indexOf(guessCount)) {
+        	return "You already guessed that!";
+    } else {
 		$feedback.text("Unexceptable!!!");
 	}
 
 });
-
-
- 
-
-		// Feedback about the guess should appear in div#feedback. 
-
-			// By default, when the page loads, the text in this field is set to "Make Your Guess!"
-
-
-
-// track how many guesses the user has made. Feedback about this should appear in span#count 
-	// (which defaults to 0, when the page loads).
-
-//  supply users with a list of the numbers they have guessed so far. The CSS for this game is set up 
-// in such a way that you can simply add each guessed number as an <li> to ul#guessList.
-
-
-
-
- // start a new game without refreshing or reloading the page.
 
 });
