@@ -71,8 +71,6 @@ $(document).ready(function(){
   	var $List = $("#guessList");
   	var guessList;
 
-  	// or?
-  	// .find()
 
  // create a newGame function that does everything necessary to start a new game.
 
@@ -81,7 +79,9 @@ $(document).ready(function(){
  	guessCount = 0;
  	guessList = [];
  		$count.text(guessCount);
- 		// clear all 
+ 		$feedback.text("Make your guess!");
+ 		$List.empty();
+ 		$input.val("");
 
 
  	};
@@ -89,7 +89,7 @@ $(document).ready(function(){
   	newGame();
  // start a new game when the user clicks the "New Game" button
    	 	$("a.new").click(function() {
- 		newGame();
+ 		newGame();	
  	});
 
  		// button does not currently do anything. write code that allows users to start a new game 
