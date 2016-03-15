@@ -86,29 +86,34 @@ $(document).ready(function(){
 
 	// without making additional calls to the server. 
 
-$button.click(function() {
-	console.log($input.val());
-	event.preventDefault();
-	var inputValue = $input.val();
-	if (isInputValid(inputValue)) {
-		var feedback = whatsUserGuess(hiddenNum, inputValue);
-		$feedback.text(feedback);
+	$button.click(function() {
+		console.log($input.val());
+		event.preventDefault();
+		var inputValue = $input.val();
+		if (isInputValid(inputValue)) {
 
-	// track how many guesses the user has made. Feedback about this should appear in span#count 
-	// (which defaults to 0, when the page loads).
+			if	(guessList.indexOf(inputValue) > -1) {
+				$feedback.text("You already guessed that!");
+			} else {
+				var feedback = whatsUserGuess(hiddenNum, inputValue);
+		// track how many guesses the user has made. Feedback about this should appear in span#count 
+		// (which defaults to 0, when the page loads).			
+
+		$feedback.text(feedback);
 		guessCount++;
-			$count.text(guessCount);
+		$count.text(guessCount);
 		guessList.push(inputValue);
 
-	// add each guessed number as an <li> to ul#guessList.
+
+		// add each guessed number as an <li> to ul#guessList.
 		$List.append("<li>" + inputValue + "</li>");
 		$input.val("");
+
 	}
-		else if (guessList.indexOf(guessCount)) {
-        	return "You already guessed that!";
-    } else {
-		$feedback.text("Unexceptable!!!");
-	}
+
+} else {
+	$feedback.text("Unexceptable!!!");
+}
 
 });
 
